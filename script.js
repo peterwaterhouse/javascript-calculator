@@ -13,24 +13,57 @@ btn6 = document.querySelector("#b6");
 btn7 = document.querySelector("#b7");
 btn8 = document.querySelector("#b8");
 btn9 = document.querySelector("#b9");
+btnPlus = document.querySelector("#bPlus");
+btnMinus = document.querySelector("#bMinus");
+btnMultiply = document.querySelector("#bMultiply");
+btnDivide = document.querySelector("#bDivide");
 inputText = document.querySelector("#input");
 answerText = document.querySelector("#answer");
 
 buttonFunctionality(btn0);
+buttonFunctionality(btn1);
+buttonFunctionality(btn2);
+buttonFunctionality(btn3);
+buttonFunctionality(btn4);
+buttonFunctionality(btn5);
+buttonFunctionality(btn6);
+buttonFunctionality(btn7);
+buttonFunctionality(btn8);
+buttonFunctionality(btn9);
+plusButtonFunctionality(btnPlus);
+minusButtonFunctionality(btnMinus);
+multiplyButtonFunctionality(btnMultiply);
+divideButtonFunctionality(btnDivide);
 
 function buttonFunctionality(button) {
     button.addEventListener("click", () => {
-        receiveInput(button);
+        lastLetter = button.id.substring(button.id.length - 1, button.id.length);
+        inputText.textContent = lastLetter;
     });
 }
 
-function receiveInput(button) {
-    if (button.getAttribute('id') == "b0") {
-        inputText.textContent = "0";
-    }
-    if (button.getAttribute('id') == "b1") {
-        inputText.textContent = "1";
-    }
+function plusButtonFunctionality(button) {
+    button.addEventListener("click", () => {
+        input.textContent = "+";
+    });
+}
+
+function minusButtonFunctionality(button) {
+    button.addEventListener("click", () => {
+        input.textContent = "-";
+    });
+}
+
+function multiplyButtonFunctionality(button) {
+    button.addEventListener("click", () => {
+        input.textContent = "*";
+    });
+}
+
+function divideButtonFunctionality(button) {
+    button.addEventListener("click", () => {
+        input.textContent = "/";
+    });
 }
 
 function operate(a, operator, b) {
