@@ -17,6 +17,8 @@ btnPlus = document.querySelector("#bPlus");
 btnMinus = document.querySelector("#bMinus");
 btnMultiply = document.querySelector("#bMultiply");
 btnDivide = document.querySelector("#bDivide");
+btnClear = document.querySelector("#bClear");
+
 inputText = document.querySelector("#input");
 answerText = document.querySelector("#answer");
 
@@ -34,6 +36,7 @@ plusButtonFunctionality(btnPlus);
 minusButtonFunctionality(btnMinus);
 multiplyButtonFunctionality(btnMultiply);
 divideButtonFunctionality(btnDivide);
+clearButtonFunctionality(btnClear);
 
 function buttonFunctionality(button) {
     button.addEventListener("click", () => {
@@ -63,6 +66,12 @@ function multiplyButtonFunctionality(button) {
 function divideButtonFunctionality(button) {
     button.addEventListener("click", () => {
         input.textContent = "/";
+    });
+}
+
+function clearButtonFunctionality(button) {
+    button.addEventListener("click", () => {
+        input.textContent = "";
     });
 }
 
