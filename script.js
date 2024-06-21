@@ -58,7 +58,7 @@ function buildInputString(input) {
             !(inputString.indexOf("*") > -1) &&
             !(inputString.indexOf("/") > -1)) {
             //make first number all the characters before the operator
-            numA = Number(inputString);
+            numA = parseFloat(inputString);
             //assign the operator to the input
             operator = input;
             addInputToString(input);
@@ -68,12 +68,9 @@ function buildInputString(input) {
 
 function equalsButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        numB = Number(inputString.slice(inputString.indexOf(operator)));
-        console.log(numA);
-        console.log(operator);
-        console.log(numB);
+        numB = parseFloat(inputString.slice(inputString.indexOf(operator) + 1));
         let answer = operate(numA, operator, numB);
-        console.log(answer);
+        answerText.textContent = answer;
     });
 }
 
@@ -121,21 +118,20 @@ function clearButtonFunctionality(button) {
 
 function operate(a, operator, b) {
     if (operator === '+') {
-        add(a, b);
+        return add(a, b);
     }
     if (operator === '-') {
-        subtract(a, b);
+        return subtract(a, b);
     }
     if (operator === '*') {
-        multiply(a, b);
+        return multiply(a, b);
     }
     if (operator === '/') {
-        divide(a, b);
+        return divide(a, b);
     }
 }
 
 function add(a, b) {
-    alert();
     return a + b;
 }
 
