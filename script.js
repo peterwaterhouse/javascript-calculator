@@ -38,10 +38,24 @@ multiplyButtonFunctionality(btnMultiply);
 divideButtonFunctionality(btnDivide);
 clearButtonFunctionality(btnClear);
 
+let inputString = "";
+
+function buildInputString(input) {
+    console.log(Number(inputString.charAt(inputString.length-1)));
+    //if the last letter in the input display string is a number
+    if (Number(inputString.charAt(inputString.length)) !== NaN) {
+        inputString = inputString + input;
+        inputText.textContent = inputString;
+    }
+    if ((inputString.charAt(inputString.length) === "*")) {
+
+    }
+}
+
 function buttonFunctionality(button) {
     button.addEventListener("click", () => {
         lastLetter = button.id.substring(button.id.length - 1, button.id.length);
-        inputText.textContent = lastLetter;
+        buildInputString(lastLetter);
     });
 }
 
