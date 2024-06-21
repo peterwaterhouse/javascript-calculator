@@ -41,35 +41,100 @@ let numA = 0;
 let numB = 0;
 let operator = "";
 
+let firstNumberString = "";
+
+let addedOperator = false;
 
 function buildInputString(input) {
-    //if input is a number, add it to the end of the string
-    if (!isNaN(Number(input))) {
-        addInputToString(input);
-    }
-    console.log(Number(input));
-    //if input is an operator, and string doesn't contain an operator, add operator to the string
-    if (((input) === "+") ||
-        ((input) === "-") ||
-        ((input) === "*") ||
-        ((input) === "/")) {
-        if (!(inputString.indexOf("+") > -1) &&
-            !(inputString.indexOf("-") > -1) &&
-            !(inputString.indexOf("*") > -1) &&
-            !(inputString.indexOf("/") > -1)) {
-            //make first number all the characters before the operator
-            numA = parseFloat(inputString);
-            //assign the operator to the input
-            operator = input;
+
+    
+
+    for (i = 0; i < inputString.length + 1; i++) {
+        //allow user to input a negative number for the first character
+        if (i === 0 && input === "-") {
             addInputToString(input);
         }
+        //if user is inputting a number, add it to the input string
+        if (!isNaN(Number(input))) {
+            addInputToString(input);
+        }
+
+        //if input is an operator, and the string doesn't contain an operator, add it
+        if (((input) === "+") ||
+            ((input) === "-") ||
+            ((input) === "*") ||
+            ((input) === "/")) {
+            if ((inputString.indexOf("+") === -1) &&
+                (inputString.indexOf("-") < 1) &&
+                (inputString.indexOf("*") === -1) &&
+                (inputString.indexOf("/") === -1)) {
+                addInputToString(input);
+                addedOperator = true;
+            }
+        }
+
+        //allow use to input a negative number after the operator has been added
+        if (addedOperator) {
+            if(input === "-") {
+                addInputToString(input);
+                addedOperator = false;
+            }
+        }
+
     }
 }
 
+
+// function buildInputString(input) {
+//     //if input is a number, add it to the end of the string
+//     if (!isNaN(Number(input))) {
+//         addInputToString(input);
+//     }
+//     //if input is an operator, and string doesn't contain an operator, add operator to the string
+//     if (((input) === "+") ||
+//         ((input) === "-") ||
+//         ((input) === "*") ||
+//         ((input) === "/")) {
+//         if (!(inputString.indexOf("+") > -1) &&
+//             !(inputString.indexOf("-") > -1) &&
+//             !(inputString.indexOf("*") > -1) &&
+//             !(inputString.indexOf("/") > -1)) {
+//             //make first number all the characters before the operator
+//             numA = parseFloat(inputString);
+//             //assign the operator to the input
+//             operator = input;
+//             addInputToString(input);
+//             //if the string already has an operator:
+//         } else {
+//             //if the character after the operator is a number, and the user inputs an operator,
+//             //find the answer to the current equation and put it in the input field
+//             if (!isNaN(Number((inputString.indexOf("+") + 1))) && ((inputString.indexOf("+") + 1) !== "") ||
+//                 !isNaN(Number((inputString.indexOf("-") + 1))) && ((inputString.indexOf("-") + 1) !== "") ||
+//                 !isNaN(Number((inputString.indexOf("*") + 1))) && ((inputString.indexOf("*") + 1) !== "")||
+//                 !isNaN(Number((inputString.indexOf("/") + 1))) && ((inputString.indexOf("/") + 1) !== "")) {
+//                 let numAstring = inputString.substring(0, inputString.indexOf(operator));
+//                 numA = parseFloat(numAstring);
+//                 numB = parseFloat(inputString.slice(inputString.indexOf(operator) + 1));
+//                 let answer = operate(numA, operator, numB);
+//                 inputString = answer + input;
+//                 inputText.textContent = inputString;
+//             }
+//         }
+
+//     }
+// }
+
+
 function equalsButtonFunctionality(button) {
     button.addEventListener("click", () => {
+        let numAstringG = inputString.substring(0, (inputString.indexOf(operator)));
+        numA = parseFloat(numAstringG);
+        console.log(numAstringG);
+        console.log(numA);
         numB = parseFloat(inputString.slice(inputString.indexOf(operator) + 1));
+        console.log(numB);
         let answer = operate(numA, operator, numB);
+        console.log(answer);
         answerText.textContent = answer;
     });
 }
