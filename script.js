@@ -1,7 +1,3 @@
-const a = 0;
-const b = 0;
-const operator = '';
-
 buttons = document.querySelectorAll("input[type=button]");
 btn0 = document.querySelector("#b0");
 btn1 = document.querySelector("#b1");
@@ -18,6 +14,7 @@ btnMinus = document.querySelector("#bMinus");
 btnMultiply = document.querySelector("#bMultiply");
 btnDivide = document.querySelector("#bDivide");
 btnClear = document.querySelector("#bClear");
+btnEquals = document.querySelector("#bEquals");
 
 inputText = document.querySelector("#input");
 answerText = document.querySelector("#answer");
@@ -37,19 +34,52 @@ minusButtonFunctionality(btnMinus);
 multiplyButtonFunctionality(btnMultiply);
 divideButtonFunctionality(btnDivide);
 clearButtonFunctionality(btnClear);
+equalsButtonFunctionality(btnEquals);
 
 let inputString = "";
+let numA = 0;
+let numB = 0;
+let operator = "";
+
 
 function buildInputString(input) {
-    console.log(Number(inputString.charAt(inputString.length-1)));
-    //if the last letter in the input display string is a number
-    if (Number(inputString.charAt(inputString.length)) !== NaN) {
-        inputString = inputString + input;
-        inputText.textContent = inputString;
+    //if input is a number, add it to the end of the string
+    if (!isNaN(Number(input))) {
+        addInputToString(input);
     }
-    if ((inputString.charAt(inputString.length) === "*")) {
+    console.log(Number(input));
+    //if input is an operator, and string doesn't contain an operator, add operator to the string
+    if (((input) === "+") ||
+        ((input) === "-") ||
+        ((input) === "*") ||
+        ((input) === "/")) {
+        if (!(inputString.indexOf("+") > -1) &&
+            !(inputString.indexOf("-") > -1) &&
+            !(inputString.indexOf("*") > -1) &&
+            !(inputString.indexOf("/") > -1)) {
+            //make first number all the characters before the operator
+            numA = Number(inputString);
+            //assign the operator to the input
+            operator = input;
+            addInputToString(input);
+        }
+    }
+}
 
-    }
+function equalsButtonFunctionality(button) {
+    button.addEventListener("click", () => {
+        numB = Number(inputString.slice(inputString.indexOf(operator)));
+        console.log(numA);
+        console.log(operator);
+        console.log(numB);
+        let answer = operate(numA, operator, numB);
+        console.log(answer);
+    });
+}
+
+function addInputToString(input) {
+    inputString = inputString + input;
+    inputText.textContent = inputString;
 }
 
 function buttonFunctionality(button) {
@@ -61,25 +91,25 @@ function buttonFunctionality(button) {
 
 function plusButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        input.textContent = "+";
+        buildInputString("+");
     });
 }
 
 function minusButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        input.textContent = "-";
+        buildInputString("-");
     });
 }
 
 function multiplyButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        input.textContent = "*";
+        buildInputString("*");
     });
 }
 
 function divideButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        input.textContent = "/";
+        buildInputString("/");
     });
 }
 
@@ -90,21 +120,22 @@ function clearButtonFunctionality(button) {
 }
 
 function operate(a, operator, b) {
-    if (operator = '+') {
+    if (operator === '+') {
         add(a, b);
     }
-    if (operator = '-') {
+    if (operator === '-') {
         subtract(a, b);
     }
-    if (operator = '*') {
+    if (operator === '*') {
         multiply(a, b);
     }
-    if (operator = '/') {
+    if (operator === '/') {
         divide(a, b);
     }
 }
 
 function add(a, b) {
+    alert();
     return a + b;
 }
 
