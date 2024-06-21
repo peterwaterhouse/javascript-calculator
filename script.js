@@ -47,8 +47,6 @@ let addedOperator = false;
 
 function buildInputString(input) {
 
-    
-
     for (i = 0; i < inputString.length + 1; i++) {
         //allow user to input a negative number for the first character
         if (i === 0 && input === "-") {
