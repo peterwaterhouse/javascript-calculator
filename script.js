@@ -51,21 +51,35 @@ function receiveInputOperator(input) {
     if (!operatorPressed) {
         numA = parseFloat(inputString);
         operator = input;
-        //inputString = "";
-        //if the operator has been pressed, make numB what's on the display
-        // and display the calculation between numA and B
-    } else {
+        console.log(inputString);
+        inputString = "";
+        operatorPressed = true;
+    }
+    //if the operator has been pressed, make numB what's on the display
+    //display the new calculation
+    else {
         numB = parseFloat(inputString);
         inputString = operate(numA, operator, numB);
         display.textContent = inputString;
+        numA = parseFloat(inputString);
+        numB = 0;
         operator = input;
-        operatorPressed = false;
+        inputString = "";
+        //operatorPressed = false;
     }
 }
 
 
 function equalsButtonFunctionality(button) {
-
+    button.addEventListener("click", () => {
+        if (operatorPressed) {
+            numB = parseFloat(inputString);
+            inputString = operate(numA, operator, numB);
+            display.textContent = inputString;
+            numA = 0;
+            numB = 0;
+        }
+    });
 }
 
 function numberButtonFunctionality(button) {
@@ -101,6 +115,11 @@ function divideButtonFunctionality(button) {
 
 function clearButtonFunctionality(button) {
     button.addEventListener("click", () => {
+        numA = 0;
+        numB = 0;
+        operator = "";
+        inputString = "";
+        display.textContent = inputString;
     });
 }
 
