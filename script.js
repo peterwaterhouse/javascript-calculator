@@ -76,6 +76,7 @@ function equalsButtonFunctionality(button) {
             numB = parseFloat(inputString);
             inputString = operate(numA, operator, numB);
             display.textContent = inputString;
+            operatorPressed = false;
             numA = 0;
             numB = 0;
         }
@@ -120,6 +121,7 @@ function clearButtonFunctionality(button) {
         operator = "";
         inputString = "";
         display.textContent = inputString;
+        operatorPressed = false;
     });
 }
 
