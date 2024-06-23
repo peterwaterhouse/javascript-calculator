@@ -16,19 +16,18 @@ btnDivide = document.querySelector("#bDivide");
 btnClear = document.querySelector("#bClear");
 btnEquals = document.querySelector("#bEquals");
 
-inputText = document.querySelector("#input");
-answerText = document.querySelector("#answer");
+display = document.querySelector("#display");
 
-buttonFunctionality(btn0);
-buttonFunctionality(btn1);
-buttonFunctionality(btn2);
-buttonFunctionality(btn3);
-buttonFunctionality(btn4);
-buttonFunctionality(btn5);
-buttonFunctionality(btn6);
-buttonFunctionality(btn7);
-buttonFunctionality(btn8);
-buttonFunctionality(btn9);
+numberButtonFunctionality(btn0);
+numberButtonFunctionality(btn1);
+numberButtonFunctionality(btn2);
+numberButtonFunctionality(btn3);
+numberButtonFunctionality(btn4);
+numberButtonFunctionality(btn5);
+numberButtonFunctionality(btn6);
+numberButtonFunctionality(btn7);
+numberButtonFunctionality(btn8);
+numberButtonFunctionality(btn9);
 plusButtonFunctionality(btnPlus);
 minusButtonFunctionality(btnMinus);
 multiplyButtonFunctionality(btnMultiply);
@@ -40,109 +39,68 @@ let inputString = "";
 let numA = 0;
 let numB = 0;
 let operator = "";
+let operatorPressed = false;
 
-let firstNumberString = "";
-
-let addedOperator = false;
-
-function buildInputString(input) {
-//try with an array, and use FOREACH. I reckon!
+function receiveInputNumber(input) {
+    inputString = inputString + input;
+    display.textContent = inputString;
 }
 
-
-// function buildInputString(input) {
-//     //if input is a number, add it to the end of the string
-//     if (!isNaN(Number(input))) {
-//         addInputToString(input);
-//     }
-//     //if input is an operator, and string doesn't contain an operator, add operator to the string
-//     if (((input) === "+") ||
-//         ((input) === "-") ||
-//         ((input) === "*") ||
-//         ((input) === "/")) {
-//         if (!(inputString.indexOf("+") > -1) &&
-//             !(inputString.indexOf("-") > -1) &&
-//             !(inputString.indexOf("*") > -1) &&
-//             !(inputString.indexOf("/") > -1)) {
-//             //make first number all the characters before the operator
-//             numA = parseFloat(inputString);
-//             //assign the operator to the input
-//             operator = input;
-//             addInputToString(input);
-//             //if the string already has an operator:
-//         } else {
-//             //if the character after the operator is a number, and the user inputs an operator,
-//             //find the answer to the current equation and put it in the input field
-//             if (!isNaN(Number((inputString.indexOf("+") + 1))) && ((inputString.indexOf("+") + 1) !== "") ||
-//                 !isNaN(Number((inputString.indexOf("-") + 1))) && ((inputString.indexOf("-") + 1) !== "") ||
-//                 !isNaN(Number((inputString.indexOf("*") + 1))) && ((inputString.indexOf("*") + 1) !== "")||
-//                 !isNaN(Number((inputString.indexOf("/") + 1))) && ((inputString.indexOf("/") + 1) !== "")) {
-//                 let numAstring = inputString.substring(0, inputString.indexOf(operator));
-//                 numA = parseFloat(numAstring);
-//                 numB = parseFloat(inputString.slice(inputString.indexOf(operator) + 1));
-//                 let answer = operate(numA, operator, numB);
-//                 inputString = answer + input;
-//                 inputText.textContent = inputString;
-//             }
-//         }
-
-//     }
-// }
+function receiveInputOperator(input) {
+    //if we haven't pressed the operator button yet, make numA what's on the display
+    if (!operatorPressed) {
+        numA = parseFloat(inputString);
+        operator = input;
+        //inputString = "";
+        //if the operator has been pressed, make numB what's on the display
+        // and display the calculation between numA and B
+    } else {
+        numB = parseFloat(inputString);
+        inputString = operate(numA, operator, numB);
+        display.textContent = inputString;
+        operator = input;
+        operatorPressed = false;
+    }
+}
 
 
 function equalsButtonFunctionality(button) {
-    button.addEventListener("click", () => {
-        let numAstringG = inputString.substring(0, (inputString.indexOf(operator)));
-        numA = parseFloat(numAstringG);
-        console.log(numAstringG);
-        console.log(numA);
-        numB = parseFloat(inputString.slice(inputString.indexOf(operator) + 1));
-        console.log(numB);
-        let answer = operate(numA, operator, numB);
-        console.log(answer);
-        answerText.textContent = answer;
-    });
+
 }
 
-function addInputToString(input) {
-    inputString = inputString + input;
-    inputText.textContent = inputString;
-}
-
-function buttonFunctionality(button) {
+function numberButtonFunctionality(button) {
     button.addEventListener("click", () => {
         lastLetter = button.id.substring(button.id.length - 1, button.id.length);
-        buildInputString(lastLetter);
+        receiveInputNumber(lastLetter);
     });
 }
 
 function plusButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        buildInputString("+");
+        receiveInputOperator("+");
     });
 }
 
 function minusButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        buildInputString("-");
+        receiveInputOperator("-");
     });
 }
 
 function multiplyButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        buildInputString("*");
+        receiveInputOperator("*");
     });
 }
 
 function divideButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        buildInputString("/");
+        receiveInputOperator("/");
     });
 }
 
 function clearButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        input.textContent = "";
     });
 }
 
