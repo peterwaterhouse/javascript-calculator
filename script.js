@@ -46,40 +46,7 @@ let firstNumberString = "";
 let addedOperator = false;
 
 function buildInputString(input) {
-
-    for (i = 0; i < inputString.length + 1; i++) {
-        //allow user to input a negative number for the first character
-        if (i === 0 && input === "-") {
-            addInputToString(input);
-        }
-        //if user is inputting a number, add it to the input string
-        if (!isNaN(Number(input))) {
-            addInputToString(input);
-        }
-
-        //if input is an operator, and the string doesn't contain an operator, add it
-        if (((input) === "+") ||
-            ((input) === "-") ||
-            ((input) === "*") ||
-            ((input) === "/")) {
-            if ((inputString.indexOf("+") === -1) &&
-                (inputString.indexOf("-") < 1) &&
-                (inputString.indexOf("*") === -1) &&
-                (inputString.indexOf("/") === -1)) {
-                addInputToString(input);
-                addedOperator = true;
-            }
-        }
-
-        //allow use to input a negative number after the operator has been added
-        if (addedOperator) {
-            if(input === "-") {
-                addInputToString(input);
-                addedOperator = false;
-            }
-        }
-
-    }
+//try with an array, and use FOREACH. I reckon!
 }
 
 
