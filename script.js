@@ -9,6 +9,7 @@ btn6 = document.querySelector("#b6");
 btn7 = document.querySelector("#b7");
 btn8 = document.querySelector("#b8");
 btn9 = document.querySelector("#b9");
+btnDecimal = document.querySelector("#bDecimal");
 btnPlus = document.querySelector("#bPlus");
 btnMinus = document.querySelector("#bMinus");
 btnMultiply = document.querySelector("#bMultiply");
@@ -19,6 +20,8 @@ btnEquals = document.querySelector("#bEquals");
 display = document.querySelector("#display");
 displayOperator = document.querySelector("#displayOperator");
 
+
+//add event listeners to each button
 numberButtonFunctionality(btn0);
 numberButtonFunctionality(btn1);
 numberButtonFunctionality(btn2);
@@ -29,6 +32,7 @@ numberButtonFunctionality(btn6);
 numberButtonFunctionality(btn7);
 numberButtonFunctionality(btn8);
 numberButtonFunctionality(btn9);
+decimalButtonFunctionality(btnDecimal);
 plusButtonFunctionality(btnPlus);
 minusButtonFunctionality(btnMinus);
 multiplyButtonFunctionality(btnMultiply);
@@ -139,6 +143,15 @@ function clearButtonFunctionality(button) {
         display.textContent = inputString;
         operatorPressed = false;
         operatorJustPressed = false;
+    });
+}
+
+function decimalButtonFunctionality(button) {
+    button.addEventListener("click", () => {
+        if (!inputString.includes(".")) {
+            inputString = inputString + ".";
+            display.textContent = inputString;
+        }
     });
 }
 
