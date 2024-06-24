@@ -54,12 +54,14 @@ function receiveInputNumber(input) {
 function receiveInputOperator(input) {
     //if we haven't pressed the operator button yet, make numA what's on the display
     if (!operatorPressed) {
-        numA = parseFloat(inputString);
-        operator = input;
-        console.log(inputString);
-        inputString = "";
-        operatorPressed = true;
-        displayOperator.textContent = operator;
+        if (inputString !== "") {
+            numA = parseFloat(inputString);
+            operator = input;
+            console.log(inputString);
+            inputString = "";
+            operatorPressed = true;
+            displayOperator.textContent = operator;
+        }
     }
     //if the operator has been pressed, make numB what's on the display
     //display the new calculation
