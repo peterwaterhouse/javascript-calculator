@@ -72,7 +72,6 @@ function receiveInputOperator(input) {
             numB = 0;
             operator = input;
             inputString = "";
-            //operatorPressed = false;
         }
     }
     operatorJustPressed = true;
@@ -81,7 +80,7 @@ function receiveInputOperator(input) {
 
 function equalsButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        if (operatorPressed) {
+        if (operatorPressed && !operatorJustPressed) {
             numB = parseFloat(inputString);
             inputString = operate(numA, operator, numB);
             display.textContent = inputString;
