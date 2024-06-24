@@ -17,6 +17,7 @@ btnClear = document.querySelector("#bClear");
 btnEquals = document.querySelector("#bEquals");
 
 display = document.querySelector("#display");
+displayOperator = document.querySelector("#displayOperator");
 
 numberButtonFunctionality(btn0);
 numberButtonFunctionality(btn1);
@@ -58,12 +59,14 @@ function receiveInputOperator(input) {
         console.log(inputString);
         inputString = "";
         operatorPressed = true;
+        displayOperator.textContent = operator;
     }
     //if the operator has been pressed, make numB what's on the display
     //display the new calculation
     else {
         if (operatorJustPressed) {
             operator = input;
+            displayOperator.textContent = operator;
         } else {
             numB = parseFloat(inputString);
             inputString = operate(numA, operator, numB);
@@ -72,6 +75,7 @@ function receiveInputOperator(input) {
             numB = 0;
             operator = input;
             inputString = "";
+            displayOperator.textContent = operator;
         }
     }
     operatorJustPressed = true;
@@ -88,6 +92,7 @@ function equalsButtonFunctionality(button) {
             numA = 0;
             numB = 0;
             operatorJustPressed = false;
+            displayOperator.textContent = "";
         }
     });
 }
