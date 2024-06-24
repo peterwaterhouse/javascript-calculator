@@ -48,8 +48,14 @@ let operator = "";
 let operatorPressed = false;
 //this bool is true if the last button pressed is an operator
 let operatorJustPressed = false;
+//true if display is showing the result after pressing =
+let equalsIsDisplayed = false;
 
 function receiveInputNumber(input) {
+    if (equalsIsDisplayed) {
+        inputString = "";
+        equalsIsDisplayed = false;
+    }
     inputString = inputString + input;
     display.textContent = inputString;
     operatorJustPressed = false;
@@ -99,6 +105,7 @@ function equalsButtonFunctionality(button) {
             numB = 0;
             operatorJustPressed = false;
             displayOperator.textContent = "";
+            equalsIsDisplayed = true;
         }
     });
 }
@@ -143,11 +150,16 @@ function clearButtonFunctionality(button) {
         display.textContent = inputString;
         operatorPressed = false;
         operatorJustPressed = false;
+        equalsIsDisplayed = false;
     });
 }
 
 function decimalButtonFunctionality(button) {
     button.addEventListener("click", () => {
+        if (equalsIsDisplayed) {
+            inputString = "";
+            equalsIsDisplayed = false;
+        }
         if (!inputString.includes(".")) {
             inputString = inputString + ".";
             display.textContent = inputString;
