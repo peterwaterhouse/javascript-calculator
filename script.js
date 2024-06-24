@@ -39,11 +39,15 @@ let inputString = "";
 let numA = 0;
 let numB = 0;
 let operator = "";
+//this bool is true if an operator has been entered for the current equation
 let operatorPressed = false;
+//this bool is true if the last button pressed is an operator
+let operatorJustPressed = false;
 
 function receiveInputNumber(input) {
     inputString = inputString + input;
     display.textContent = inputString;
+    operatorJustPressed = false;
 }
 
 function receiveInputOperator(input) {
@@ -58,15 +62,20 @@ function receiveInputOperator(input) {
     //if the operator has been pressed, make numB what's on the display
     //display the new calculation
     else {
-        numB = parseFloat(inputString);
-        inputString = operate(numA, operator, numB);
-        display.textContent = inputString;
-        numA = parseFloat(inputString);
-        numB = 0;
-        operator = input;
-        inputString = "";
-        //operatorPressed = false;
+        if (operatorJustPressed) {
+            operator = input;
+        } else {
+            numB = parseFloat(inputString);
+            inputString = operate(numA, operator, numB);
+            display.textContent = inputString;
+            numA = parseFloat(inputString);
+            numB = 0;
+            operator = input;
+            inputString = "";
+            //operatorPressed = false;
+        }
     }
+    operatorJustPressed = true;
 }
 
 
@@ -79,6 +88,7 @@ function equalsButtonFunctionality(button) {
             operatorPressed = false;
             numA = 0;
             numB = 0;
+            operatorJustPressed = false;
         }
     });
 }
@@ -122,6 +132,7 @@ function clearButtonFunctionality(button) {
         inputString = "";
         display.textContent = inputString;
         operatorPressed = false;
+        operatorJustPressed = false;
     });
 }
 
