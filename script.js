@@ -16,6 +16,7 @@ btnMultiply = document.querySelector("#bMultiply");
 btnDivide = document.querySelector("#bDivide");
 btnClear = document.querySelector("#bClear");
 btnEquals = document.querySelector("#bEquals");
+btnPlusMinus = document.querySelector("#bPlusMinus");
 
 display = document.querySelector("#display");
 displayOperator = document.querySelector("#displayOperator");
@@ -39,6 +40,7 @@ multiplyButtonFunctionality(btnMultiply);
 divideButtonFunctionality(btnDivide);
 clearButtonFunctionality(btnClear);
 equalsButtonFunctionality(btnEquals);
+plusMinusButtonFunctionality(btnPlusMinus);
 
 let inputString = "";
 let numA = 0;
@@ -151,6 +153,23 @@ function clearButtonFunctionality(button) {
         operatorPressed = false;
         operatorJustPressed = false;
         equalsIsDisplayed = false;
+    });
+}
+
+function plusMinusButtonFunctionality(button) {
+    button.addEventListener("click", () => {
+        if (!operatorJustPressed) {
+            inputString = parseFloat(display.textContent) * -1;
+            display.textContent = inputString;
+        } else {
+            if (inputString === "-") {
+                inputString = "";
+                display.textContent = inputString;
+            } else {
+                inputString = "-";
+                display.textContent = inputString;
+            }
+        } 
     });
 }
 
