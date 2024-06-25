@@ -1,0 +1,33 @@
+body {
+    display: flex;
+}
+
+.frame {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    width: 300px;
+    height: 400px;
+    margin: auto;
+    border: 1px solid;
+}
+
+.mainB {
+    width: 20%;
+    height: 20%;
+    box-sizing: border-box;
+}
+
+.screen {
+    display: flex;
+    flex-grow: 10;
+    height: 50px;
+    background-color: aquamarine;
+}
+
+.topB {
+    width: 20%;
+    height: 20%;
+    box-sizing: border-box;
+}
