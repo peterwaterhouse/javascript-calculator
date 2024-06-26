@@ -4,4 +4,6 @@ This is an old-fashioned style calculator coded in Javascript without using the 
 
 Try out the calculator here: https://peterwaterhouse.github.io/javascript-calculator/
 
-TODO: Disallow the user from overflowing the screen with digits.
+TODO: 
+- Disallow the user from overflowing the screen with digits.
+- Add for loops for assigning listeners/events rather than the repeat lines over and over early on in the script
