@@ -1,3 +1,4 @@
+//find each div/item in html
 buttons = document.querySelectorAll("input[type=button]");
 btn0 = document.querySelector("#b0");
 btn1 = document.querySelector("#b1");
@@ -42,9 +43,13 @@ clearButtonFunctionality(btnClear);
 equalsButtonFunctionality(btnEquals);
 plusMinusButtonFunctionality(btnPlusMinus);
 
+
+//the numeric string displayed on the calculator screen
 let inputString = "";
+//the two numbers being operated on
 let numA = 0;
 let numB = 0;
+//the +-/* operator
 let operator = "";
 //this bool is true if an operator has been entered for the current equation
 let operatorPressed = false;
@@ -53,6 +58,7 @@ let operatorJustPressed = false;
 //true if display is showing the result after pressing =
 let equalsIsDisplayed = false;
 
+//if a number is received, add it to the string on the screen
 function receiveInputNumber(input) {
     if (equalsIsDisplayed) {
         inputString = "";
@@ -96,6 +102,7 @@ function receiveInputOperator(input) {
 }
 
 
+//operate on the numbers, then reset them for the user to enter new numbers
 function equalsButtonFunctionality(button) {
     button.addEventListener("click", () => {
         if (operatorPressed && !operatorJustPressed) {
@@ -143,6 +150,7 @@ function divideButtonFunctionality(button) {
     });
 }
 
+//clear everything back to default values
 function clearButtonFunctionality(button) {
     button.addEventListener("click", () => {
         numA = 0;
@@ -156,28 +164,30 @@ function clearButtonFunctionality(button) {
     });
 }
 
+//if there's no numbers on screen, add a "-" when +/- is pressed, otherwise multiply number by -1
 function plusMinusButtonFunctionality(button) {
     button.addEventListener("click", () => {
         if (inputString === "") {
             inputString = "-";
             display.textContent = inputString;
         } else {
+            if (inputString === "-") {
+                inputString = "";
+                display.textContent = inputString;
+            } else {
             if (!operatorJustPressed) {
                 inputString = parseFloat(display.textContent) * -1;
                 display.textContent = inputString;
             } else {
-                if (inputString === "-") {
-                    inputString = "";
-                    display.textContent = inputString;
-                } else {
-                    inputString = "-";
-                    display.textContent = inputString;
-                }
+                inputString = "-";
+                display.textContent = inputString;
             }
         }
+    }
     });
 }
 
+//if string doesnt already contain a decimal, add one if pressed
 function decimalButtonFunctionality(button) {
     button.addEventListener("click", () => {
         if (equalsIsDisplayed) {
