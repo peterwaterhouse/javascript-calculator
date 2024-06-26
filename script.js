@@ -158,18 +158,23 @@ function clearButtonFunctionality(button) {
 
 function plusMinusButtonFunctionality(button) {
     button.addEventListener("click", () => {
-        if (!operatorJustPressed) {
-            inputString = parseFloat(display.textContent) * -1;
+        if (inputString === "") {
+            inputString = "-";
             display.textContent = inputString;
         } else {
-            if (inputString === "-") {
-                inputString = "";
+            if (!operatorJustPressed) {
+                inputString = parseFloat(display.textContent) * -1;
                 display.textContent = inputString;
             } else {
-                inputString = "-";
-                display.textContent = inputString;
+                if (inputString === "-") {
+                    inputString = "";
+                    display.textContent = inputString;
+                } else {
+                    inputString = "-";
+                    display.textContent = inputString;
+                }
             }
-        } 
+        }
     });
 }
 
